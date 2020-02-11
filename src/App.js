@@ -11,59 +11,39 @@ import {
 } from "react-router-dom";
 
 class App extends Component {
-    render() {
-        return ( <
-            Router >
-            <
-            Accueil / >
-            <
-            div >
-            <
-            nav >
-            <
-            ul >
-            <
-            li >
-            <
-            Link to = "/" > Accueil < /Link> <
-            /li> <
-            li >
-            <
-            Link to = "/users" > Config < /Link> <
-            /li> <
-            li >
-            <
-            Link to = "/about" > About < /Link> <
-            /li> <
-            /ul> <
-            /nav>
+  constructor (...props) {
+    super(...props);
+    this.state = {
+      StateParent: ''
+    };
+  }
 
-            {
-                /* A <Switch> looks through its children <Route>s and
-                            renders the first one that matches the current URL. */
-            } <
-            Switch >
-            <
-            Route path = "/about" >
-            <
-            About / >
-            <
-            /Route> <
-            Route path = "/users" >
-            <
-            Config / >
-            <
-            /Route> <
-            Route path = "/" >
-            <
-            Accueil / >
-            <
-            /Route> <
-            /Switch> <
-            /div> <
-            /Router>
-        );
-    }
+  exampleClick = (e) => {
+    this.setState({...this.state, StateParent:e});
+  }
+
+  render() {
+      return (
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li><Link to = "/"> Accueil </Link></li>
+                <li><Link to = "/Config"> Configuration </Link></li>
+                <li><Link to = "/About"> À propos </Link></li>
+              </ul>
+            </nav>
+            {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+            <Switch>
+              <Route exact path = "/" ><Accueil propsChild={this.state.StateParent}/></Route>
+              <Route path = "/Config" ><Config propsChild={this.exampleClick} /></Route>
+              <Route path = "/About" ><About /></Route>
+            </Switch>
+          </div>
+        </Router>
+      );
+  }
 }
 
 
