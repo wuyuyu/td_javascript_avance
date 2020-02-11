@@ -1,4 +1,8 @@
-import React from "react";
+import React,{ Component } from 'react';
+import './App.css';
+import Accueil from './Accueil';
+import Config from './Config';
+import About from './About';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,20 +10,22 @@ import {
   Link
 } from "react-router-dom";
 
-export default function App() {
-  return (
-    <Router>
+class App extends Component{
+  render(){
+    return(
+      <Router>
+      <Accueil/>
       <div>
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">Accueil</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about">Config</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/users">About</Link>
             </li>
           </ul>
         </nav>
@@ -31,25 +37,17 @@ export default function App() {
             <About />
           </Route>
           <Route path="/users">
-            <Users />
+            <Config />
           </Route>
           <Route path="/">
-            <Home />
+            <Accueil />
           </Route>
         </Switch>
       </div>
     </Router>
-  );
+    );
+  }
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
 
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
+  export default App;
