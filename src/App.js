@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Accueil from './Accueil';
 import Config from './Config';
+import Jeu from './Jeu';
 import About from './About';
 import {
     BrowserRouter as Router,
@@ -30,6 +31,7 @@ class App extends Component {
               <ul>
                 <li><Link to = "/"> Accueil </Link></li>
                 <li><Link to = "/Config"> Configuration </Link></li>
+                <li><Link to = "/Jeu">Chiffre à trouver</Link></li>
                 <li><Link to = "/About"> À propos </Link></li>
               </ul>
             </nav>
@@ -38,6 +40,7 @@ class App extends Component {
             <Switch>
               <Route exact path = "/" ><Accueil propsChild={this.state.StateParent}/></Route>
               <Route path = "/Config" ><Config propsChild={this.exampleClick} /></Route>
+              <Route path = "/Jeu" ><Jeu /></Route>
               <Route path = "/About" ><About /></Route>
             </Switch>
           </div>
