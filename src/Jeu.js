@@ -17,29 +17,17 @@ class Jeu extends React.Component {
         };
     }
 
-    storeScore() {
-        this.props.storeScore({
-            name: this.state.stateChild,
-            number: this.nombreCherche,
-            score: this.state.compteurEssai
-        });
-        this.setState({...this.state, compteurEssai: 0})
+    storeScore(newTab) {
+        this.props.storeScore(newTab);
+        this.setState({...this.state, compteurEssai: 0 });
+        this.nombreCherche = this.getRandomInt(100);
     }
 
     getRandomInt = (max) => {
-        return Math.floor(Math.random() * Math.floor(max + 1));
+        let rdm = Math.floor(Math.random() * Math.floor(max + 1));
+        console.log(rdm);
+        return rdm;
     }
-
-    endGame = () => {
-        /* if (this.state.tableauCoups.length > 5) {
-            this.state.tableauCoups.shift();
-        } */
-        //displayTab();
-    }
-
-
-
-
 
     isFound = (event) => {
         event.preventDefault();
@@ -56,9 +44,10 @@ class Jeu extends React.Component {
             this.setState({...this.state, text: 'C\'est moins.' });
         } else if (arg == this.nombreCherche) {
             console.log('=')
-            this.setState({...this.state, text: 'C\'est gagné!'});
-            this.storeScore();
-            this.nombreCherche = this.getRandomInt(100);
+            this.setState({...this.state, text: "C'est gagné!"}, function () {
+                this.compareScore();
+            });
+            console.log('text', this.state.text);
 
         } else {
             this.setState({...this.state, text: 'Erreur dans l\'entrée' });
@@ -67,29 +56,37 @@ class Jeu extends React.Component {
 
     isLost = () => {
         console.log('isLost');
-        this.setState({...this.state, text: 'C\'est perdu.', compteurEssai: -1 });
-        this.storeScore();
-        this.nombreCherche = this.getRandomInt(100);
+        this.setState({...this.state, text: "C'est perdu!",compteurEssai: -1}, function () {
+            this.compareScore();
+        });
 
     }
 
-    /*compareScore = () => {
-        if (games.lenght>=5){
-            console.log(games.lenght)
-            let compPt=this.state.compteurEssai;
-            games.map(game => {
-                for (var points of game.score) {
-                    if (points <= compPt){
-                        compPt=points;
-                    }
-                    this.storeScore();
-                }
-            });
+    sortScore(a, b) {
+        if (a.score === b.score) {
+            return 0;
         }
-        else{
-            this.storeScore();
+        else {
+            return (a.score < b.score) ? -1 : 1;
         }
-    }*/
+    }
+
+    compareScore = () => {
+        const newTab = this.props.games;
+        newTab.push({
+            name: this.state.stateChild,
+            number: this.nombreCherche,
+            score: this.state.compteurEssai
+        });
+
+        newTab.sort(this.sortScore);
+
+        if (newTab.length > 5) {
+            newTab.pop();
+        }
+
+        this.storeScore(newTab);
+    }
 
     /*componentDidUpdate({propsChild}) {
         this.setState({...this.state, stateChild:propsChild});

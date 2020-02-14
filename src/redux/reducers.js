@@ -10,13 +10,7 @@ const initialState = {
      * @param      {Number}  {number}
      * @param      {Number}  {score}
      */
-    games: [
-        {
-            name: '',
-            number: null,
-            score: null
-        }
-    ],
+    games: []
 };
 
 const arrayHasIndex = (array, index) => Array.isArray(array) && array.hasOwnProperty(index);
@@ -26,7 +20,7 @@ export default function reducer(state = initialState, action) {
     switch (action.type) {
 
         case STORE_SCORE:
-            return { ...state, games: [ ...state.games, action.game ] };
+            return { ...state, games: action.game };
 
         default:
             return state;
