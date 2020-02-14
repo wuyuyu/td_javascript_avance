@@ -63,11 +63,19 @@ class Jeu extends React.Component {
     }
 
     sortScore(a, b) {
-        if (a.score === b.score) {
+        let val1= a.score;
+        let val2= b.score;
+        if(val1 <0){
+            val1=999999;
+        }
+        if(val2 <0){
+            val2=999999;
+        }
+        if (val1 === val2) {
             return 0;
         }
         else {
-            return (a.score < b.score) ? -1 : 1;
+            return (val1 < val2) ? -1 : 1;
         }
     }
 
