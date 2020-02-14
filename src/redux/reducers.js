@@ -12,9 +12,9 @@ const initialState = {
      */
     games: [
         {
-            name: 'Bidule',
-            number: 56,
-            score: 3
+            name: '',
+            number: null,
+            score: null
         }
     ],
 };

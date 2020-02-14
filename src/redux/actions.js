@@ -12,7 +12,7 @@ export const STORE_SCORE = 'STORE_SCORE';
  * Add student to store
  *
  * @param      {String}  {type}  Reducer action
- * @param      {Object}  {game:{name, points}}  Score datas
+ * @param      {Object}  {game:{name, number, score}}  Score datas
  * @return     {Object}  Redux Store Object
  */
 

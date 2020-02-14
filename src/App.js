@@ -20,9 +20,35 @@ const store = createStore(reducer);
 class App extends Component {
   constructor (...props) {
     super(...props);
+    
     this.state = {
       StateParent: ''
     };
+
+    /*this.routes = [
+      {
+        path: '/',
+        text: 'Accueil',
+        component: Home
+      },
+      {
+        path: '/students',
+        text: 'Etudiants',
+        component: Students,
+        routes: [
+          {
+            path: 'student?add',
+            text: 'Ajouter',
+            component: Student
+          },
+          {
+            path: 'student?edit',
+            text: 'Ajouter',
+            component: Student
+          }
+        ]
+      }
+    ];*/
   }
 
   exampleClick = (e) => {
